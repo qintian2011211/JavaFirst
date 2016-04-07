@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<title>html</title>
+		<meta name="Keywords" content="keyword,keyword">
+		<meta name="description" content="">
+
+		<!--css,js-->
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{margin:100px;background:#111;font-size:14px;font-family:"微软雅黑";font-weight:600;color:#F1F1F1}
+		</style>
+
+	</head>
+<body>
+	<pre>·java08工具类
+
+目标
+·字符串String
+·时间Date
+·数学Match
+·使用正则验证字符串
+
+复习
+·OOP入门(面向Oriented 对象 编程)
+(1)生活--》程序对应！
+每类物体		类class
+每个物体		对象（类的一个实例）
+物体属性		成员变量(属性)
+动作		方法
+(2) 类，对象，属性，方法
+   各种语法
+(3)各种参数
+·任意个数，任意类型
+·固定类型的一组数----》数组
+·更加复杂---》传对象！ 【***】
+·对象组成的数组---》难！！！
+  Dog[] dogs = new Dog[2];
+  dogs[0]=dog1;  *****
+【注意：方法要灵活使用！】
+
+
+1.jdk源码有个说明文档：
+  叫API(帮助手册)
+2.字符串常见方法16个！
+3.字符串比较
+·==:基本数据类型使用！
+·equals: 引用数据类型使用！
+·==在引用数据类型中比较的是地址！
+·字符串不通过new关键字创建，可以当成基本数据类型使用！
+4.时间 Date
+格式化系统事件为指定格式字符串！
+SimpleDateFormat 名= new Si....("时间格式")
+格式化方法：
+ 名.format(日期);
+时间格式:yyyy 年
+         MM   月
+         dd   日
+         HH小时 mm分  ss秒  sss 毫秒
+
+5.StringBuffer字符串增强版！
+  加快字符串的拼接效率！
+·创建
+StringBuffer sb = new StringBuffer("zzy")
+·追加
+  sb.append(字符串);
+·转化为字符串显示
+  sb.toString();
+StringBuilder和StringBuffer功能一样，
+StringBuffer支持多线程安全高！
+
+
+=-=-=-=-=- 2016/1/7 14:15:02 =-=-=-=-
+·获取系统当前事件为毫秒数
+long end=System.currentTimeMillis();
+
+重点：
+·数学函数Math
+·正则校验！
+
+1.java.lang.Math
+最大：max
+最小：min
+随机：random();
+四舍五入：round();
+向上取整：ceil  3.1-->4 天花板
+向下取整：floor 3.9999-->3 底板
+2.正则
+·定义：是一种验证字符串规则的表达式！
+·作用：做字符串校验！
+·应用：各种网络输入中...
+·正则表达式可用于任何一门高级语言：
+  比如：java,objectC,php,.net,网页js,
+  ...
+·使用：
+  字符串.matches(正则)-->成功true
+                         失败：false
+1.正则表达式：
+(1)是一种字符串验证规则，专门用于做字符串的格式校验
+   比如：校验电话号码1[3,4,5,7,8]******         验证邮箱。。。等
+(2)英文：
+   Regular  Expression 正则表达式，简写regx
+   【rui gei ou le】  【ei ke si pu ruai sen】
+·规则：
+\\ ----- \
+^  ----- 开始在[]中表示非
+$  ------结束
+ 开始和结束一般省略
+\d ----- 0-9的数字等同[0-9]
+[] ----- 表示范围
+[^]----- 不在该范围 [^0-9]
+\w ----- 字母数字下划线
+\W ----- 非字母数字下划线
+\s ----- 1个空白
+\S ----- 1个非空白
+...更多参考PPT
+
+验证手机号规则："1[3,4,5,7,8]\\d{9}"
+
+
+
+总结：
+·String 方法 16个
+·StringBuffer
+·== 和equals 区别
+·事件(Date和Calander)
+·Math和正则
+
+
+
+
+</pre>
+	<script type="text/javascript">
+	
+	</script>
+
+
+</body>
+</html>

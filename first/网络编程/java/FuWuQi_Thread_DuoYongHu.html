@@ -1,0 +1,56 @@
+</pre>
+package com.qt.fuwuqi;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.net.Socket;
+
+import com.qt.tool.Dog;
+import com.qt.tool.Tool;
+
+public class FuWuQi_Thread extends Thread{
+	Socket socket;
+	
+	//有参构造方法
+	public FuWuQi_Thread(Socket socket) {
+		this.socket=socket;
+	}
+	public void  run() {
+		String Thread_name=Thread.currentThread().getName();
+		
+		System.out.println("你得到一个线程！！"+Thread_name);
+		try {
+			//需要给予线程 的代码
+			InputStream is=socket.getInputStream();
+			ObjectInputStream ois=new ObjectInputStream(is);
+			Tool tool=(Tool) ois.readObject();
+			Dog dog=tool.getDog();
+			System.out.println(dog.getName()+dog.getPassword());
+			tool.setResult("已接受");
+			//返回用户结果对象
+			OutputStream os=socket.getOutputStream();
+			ObjectOutputStream oos=new ObjectOutputStream(os);
+			oos.writeObject(tool);
+			
+			oos.close();
+			os.close();
+			ois.close();
+			is.close();
+			socket.close();
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+}
+</pre>

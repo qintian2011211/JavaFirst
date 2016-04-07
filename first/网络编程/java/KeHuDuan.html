@@ -1,0 +1,49 @@
+<pre>
+package com.qt.kehuduan;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class KeHuDuan {
+	public static void main(String[] args) {
+		
+		
+		try {
+			System.out.println("客户端开始");
+			Socket s=new Socket("127.0.0.1",8080);
+			
+			
+			OutputStream os=s.getOutputStream();
+			os.write("你个逗逼".getBytes());
+			//暂时停止输出流
+			s.shutdownOutput();
+			//读取服务器返回的信息
+			InputStream is=s.getInputStream();
+			InputStreamReader isr=new InputStreamReader(is);
+			BufferedReader br=new BufferedReader(isr);
+			String str=br.readLine();
+			System.out.println(str);
+			
+			br.close();
+			isr.close();
+			is.close();
+			os.close();
+			s.close();
+			
+			
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+}
+</pre>

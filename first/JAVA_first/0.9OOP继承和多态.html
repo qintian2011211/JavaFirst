@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<title>html</title>
+		<meta name="Keywords" content="keyword,keyword">
+		<meta name="description" content="">
+
+		<!--css,js-->
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{margin:100px;background:#111;font-size:14px;font-family:"微软雅黑";font-weight:600;color:#F1F1F1}
+		</style>
+
+	</head>
+<body>
+	<pre>1.继承：
+  作用：实现代码的重用,定义一次，多次使用
+  注：子类和父类要满足is-a的关系
+  语法：
+     访问修饰符 class 子类  extends 父类类名{
+        //属性和方法
+     }
+  注：父类中定义子类公有的属性和方法
+      子类中定义子类特有的属性和方法
+2.方法重写：
+  在子类中，存在和父类相同的方法,称为方法重写
+  验证方法是否重写父类方法？
+  在子类的方法中添加@Override
+3.对比方法重写(override)和方法重载(overload)
+(1)概念：
+    方法重载：
+    在本类中，方法名相同，参数列表不同
+     （数据类型,参数个数,参数顺序）的方法
+    如构造方法
+    方法重写：
+    在子类中,定义和父类相同的方法
+(2)使用范围：
+   方法重载要求在本类中,方法重写要求在继承关系中
+注：
+  当方法被重写后,子类调用的是重写以后的方法
+
+4.super关键字：
+  作用：表示父类的一个引用(一个对象)
+  功能：
+    调用父类构造:super(参数);
+    调用父类的属性:super.属性名;
+    调用父类的方法：super.方法名();
+区别：this表示本类对象的一个引用
+      super表示父类对象的引用
+5.在继承关系中构造方法的继承关系：
+  (1)默认情况下,会自动调用父类的无参构造方法
+  (2)当子类通过super调用父类的有参构造时，
+     先执行父类对应的构造方法。
+  (3)当本类中通过this关键字调用自身构造方法时,
+     分别执行自身和父类对应的构造方法
+  (4)java中所有类的父类是Object(终极父类)
+  
+  
+
+
+
+多态:
+  使用同一引用类型，通过传入不同的实例而实现
+  代码的多种表现形态
+实例代码：
+  关键点：1.要体现继承关系
+          2.要重写父类方法
+          3.将父类引用作为参数
+public class Father{
+   public void say(){};
+}
+public class son1 extends Father{
+   @Override
+   public void say(){
+     System.out.println("son1");
+   }
+}
+public class son2 extends Father{
+   @Override
+   public void say(){
+      System.out.println("son2");
+   }
+}
+public class Three{//普通类
+   public void test(Father f){//将父类作为参数
+      f.say();
+   }
+}
+测试类：
+  Son1 son1=new Son1();
+  Three t=new Three();
+  t.test(son1);//输出结果：son1
+
+
+----------------------------
+向上转型：
+  父类类名  对象名=new 子类类名();
+示例：
+  Father father=new Son();
+向上转型后的特点:
+  (1)该对象只能调用继承过来的父类信息和
+      重写后的方法
+  (2)不能调用子类独有的属性和方法
+  
+向下转型： 
+  子类类型 对象名=(子类类型)父类引用;
+示例：
+  Dog dog=(Dog)pet;//pet是父类对象名
+注：向下转型时要转换到实际的类型，不然会报
+    类型转换异常。
+    
+使用instanceof判断父类引用对象和定义类的关系：
+ 示例：
+    Father f=new Son();
+    if(f instanceof Son){
+       System.out.println("和son类有关系");
+    }    
+      
+    
+  
+  
+抽象方法和抽象类：
+  抽象方法:没有方法体的方法，并使用abstract修饰
+  示例：
+    public abstract void test();
+  抽象类:有抽象方法的类，称为抽象类，并使用abstract
+         进行修饰
+  示例:
+    public abstract class Test{}
+抽象类和普通类的区别：
+  抽象类不能实例化，普通类可以实例化
+  有抽象方法的类必须是抽象类，
+  但抽象类中不一定有抽象方法。
+      
+          
+          
+          
+          
+
+
+    
+    
+      
+  
+
+
+
+
+
+
+
+
+
+   </pre>
+	<script type="text/javascript">
+	
+	</script>
+
+
+</body>
+</html>

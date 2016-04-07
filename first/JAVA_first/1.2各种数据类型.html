@@ -1,0 +1,216 @@
+<!doctype html>
+<html>
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<title>html</title>
+		<meta name="Keywords" content="keyword,keyword">
+		<meta name="description" content="">
+
+		<!--css,js-->
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{margin:100px;background:#111;font-size:14px;font-family:"微软雅黑";font-weight:600;color:#F1F1F1}
+		</style>
+
+	</head>
+<body>
+	
+
+	<pre>
+	
+	
+复习：
+  java中处理异常：
+  try,catch,finally,throw,throws
+  try{
+  
+  }catch(异常类型 ex){
+  
+  }finally{
+  
+  }
+  throw负责抛出异常
+  处理抛出异常的办法：(二选一)
+     (1)继续声明异常
+     (2)使用try-catch处理异常   
+集合：
+  List集合:
+     存储特点：不唯一，有序
+     arrayList:顺序存储,遍历或随机访问时效率高
+     LinkedList:链式存储,插入或删除数据效率高
+ 共有方法：
+    添加：add(Object obj)
+    删除：remove(int index)
+    获得数据：get(int index)
+    更新数据：set(int index,Object obj)
+    是否为空：isEmpty()
+ LinkedList特有方法：
+    addFirst(Object obj)
+    addLast(Object obj)
+    getFirst()
+    getLast()
+    removeFirst();
+    removeLast()
+ 注：调用LinkedList特有方法时,声明的是LinkedList的对象   
+  set集合:
+     存储特点：唯一，无序
+  HashSet:
+  常用方法：
+     添加数据：add(Object obj)
+     访问数据:
+     (1)增强for循环(foreach)
+       for(Object obj:set集合){}
+     (2)迭代器：
+       //1.获得迭代器对象
+       Iterator it=集合.iterator();
+       //2.使用while循环遍历：
+       while(it.hasNext()){
+           Object obj=it.next();//获得具体某一个对象
+           //需要向下转型
+       }          
+  1-14:
+   (1)  Map集合：
+        存储特点：使用key-value(键-值对)存储方式
+        访问数据时通过key值查找value值
+        key和value都是Object类型，但是实际开发中
+        通常会使用String作为key,对象作为value 
+     注：key不允许重复，value值可以重复
+     常用方法：
+       1.存值：put(Object key,Object value)   
+       2.取值：get(Object key)
+       3.获取key值集合：keySet();
+       4.获得value值的集合：values()
+       注：返回value值的集合是Collection类型
+           然后调用toArray()方法,返回对象数组
+       Object[] obj=map.values().toArray();
+       5.判断key值是否存在：
+           containsKey(Object key)
+       6.判断value值是否存在：
+           containsValue(Object value)
+       7.判断是否为空：
+          isEmpty();
+       8.获得集合大小
+          size()
+       9.清空集合
+          clear()
+       10.通过key值删除对象
+          remove(Object key)
+   练习：创建一个教师类，包含教师的名字和所授课程
+   需求：使用map集合保存三名教师，信息自拟，
+         然后遍历三名教师的信息。
+         提供用户一个可以查询教师是否存在的方法           
+   (2)泛型：
+     作用：使存放到集合中的数据只能按照规定类型存储
+           保证了集合中数据类型的统一 
+     本质：参数化类型
+     语法：<数据类型>
+     示例：
+       //该集合中只能存储Student对象
+       List<Student> list=new ArrayList<Student>(); 
+     
+     泛型的种类：
+       <1>泛型接口
+          public interface 接口名<泛型参数>{
+           
+          }
+       示例：
+          public interface inter<T>{
+            public T  test(T t);
+          }
+          说明：T的位置表示使用的是同一种类型
+       <2>泛型类：
+          public class 类名<T>{}
+        示例：
+          public class test<T>{
+            public void test(T t){}
+          }
+        注：泛型类多用于父类定义
+       <3>泛型类的继承：
+         1.面向对象的特性同样适用于泛型类，
+           所以泛型类也可以被继承
+	       2.继承了泛型类的子类，必须也是泛型类
+	       示例：
+	         public class Son<T> extends Father<T>{
+	         }
+	    练习：分别使用泛型list,map,set保存学生对象     
+
+    (3)对集合中数据进行排序：
+     工具类：Collections.sort(List list);
+     对比：Collections和Collection
+      Collections是对集合操作的工具类
+      Collection 是一个接口
+    注：如果集合中保存的是对象，则需要对对象所在的类进行
+        修改。让该类实现Comparable接口,重写CompareTo()方法
+    CompareTo()方法需要返回正数,负数,0
+    示例：
+      public class Student implements Comparable{
+        private int age;
+        public int compareTo(Object o){
+           Student s=(Student)o;
+           if(s.age>this.age){
+              return -1;
+           }
+           if(s.age==this.age){
+              return 0;
+           }
+           if(s.age<this.age){
+             return 1;
+           }
+           return 0;
+        }     
+      }
+需求：教师类中有教师编号，教师姓名，要求按照教师编号
+      降序排序，并显示编号及姓名
+  
+        
+    (4)枚举
+      1.本质：一组常量的组合
+      2.创建方式：
+         public enum 枚举名{
+            //枚举值
+         }
+       示例：
+          public enum Day{
+            oneDay,twoDay//多个枚举值之间使用逗号间隔
+          }  
+      3.调用方式： 
+          枚举名.枚举值      或     枚举值
+       示例：Day.oneDay             oneDay 
+      4.使用场合：当定义的内容不会更改时，使用枚举
+      
+   (5)包装类：将基本数据类型封装到一个类中，提供属性和方法
+   基本数据类型      包装类：
+     int              Integer
+     double           Double
+     short            Short
+     long             Long
+     float            Float
+     byte             Byte
+     char             Character 
+     boolean          Boolean  
+   方法：
+          Integer.parseInt(String str);
+          Double.parseDouble(String str);
+   (6)随机数的生成：
+      方法1：
+         Math.random();//生成0-1之间的浮点值
+      方式2：
+         Random random=new Random();
+         random.nextInt(范围值);//生成范围值以内的随机整数
+      示例：
+         random.nextInt(10);//生成10以内的整数随机数
+          
+     
+     
+     
+	
+	</pre>
+	<script type="text/javascript">
+	
+	</script>
+
+
+</body>
+</html>

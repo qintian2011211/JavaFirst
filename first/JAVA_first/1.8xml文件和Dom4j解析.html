@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<title>html</title>
+		<meta name="Keywords" content="keyword,keyword">
+		<meta name="description" content="">
+
+		<!--css,js-->
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{margin:100px;background:#111;font-size:14px;font-family:"微软雅黑";font-weight:600;color:#F1F1F1}
+		</style>
+
+	</head>
+<body>
+	<pre>1.定义xml文件:
+  (1)xml：可扩展标记语言，用于存储数据
+     优点：结构清晰,体积小
+  (2)定义要求：   
+     <1>要有声明语句,而且要在第一行:
+       <?xml version="1.0" encoding="utf-8" ?>
+     <2>一个xml文件只能有一个根元素(根标签)
+     <3>标签要正确嵌套,且标签名区分大小写
+     <4>属性值要用双引号引起来
+     <5>要存的值可以以属性值或者标签中的值,
+        两种方式进行保存。
+  语法:
+     <标签名 属性名="属性值">
+        <标签名>值</标签名>
+     </标签名>        
+  示例：
+    <book id="bk101">
+      <name>java开发</name>
+    </book>
+
+2.DTD验证:
+ 作用:规定xml文件中标签内容的格式
+ 语法：
+    <!DOCTYPE 根元素[
+      <!ELEMENT 子标签 (子标签中的内容)>
+    ]>
+  注：
+   (1)中间空格必须添加
+   (2)如果子标签中的内容是标签的话，直接写标签名，用逗号隔开
+      如果是纯文本的话,使用#PCDATA表示
+   (3)dtd描述时，先从根标签开始描述,描述完毕后,再是子标签
+   (4)描述标签出现次数的通配符：
+       ?  (0-1次)
+       +  (1-多次)
+       *  (0-多次)
+   (5)限定标签中的属性：
+   语法：
+     <!ATTLIST 标签名  属性名 属性类型 权限限定 >
+   示例:
+   //student中有一个id属性，id属性中包含文本,是必填项
+     <!ATTLIST student id CDATA #REQUIRED>     
+
+
+dom解析：
+  实现步骤：
+    1.创建解析器工厂
+    DocumentBuilderFactory factory=
+      DocumentBuilderFactory.newInstance(); 
+    2.获得解析器对象
+      DocumentBuilder builder=
+          factory.newDocumentBuilder();
+    3.获得Document对象,表示整个xml
+      org.w3c.dom.Document doc=
+          builder.parse("xml文件路径");    
+    4.获得根节点：
+     Element root= doc.getDocumentElement(); 
+    5.解析xml
+      常用方法：
+         getNodeName():获得节点名
+         getNodeType():获得节点类型
+         item(int index):遍历节点集合
+         getTextContent:获得最后一层节点中的内容
+         getLength():获得集合长度
+ 小结：dom解析中使用的类：
+   Document,NodeList,Node,Element
+   6.获取标签中的属性值：
+      //将node节点对象强转为Element
+     示例：
+        Element e=(Element)node;//node是Node类的对象
+        e.getAttribute("属性名");//获得标签中指定的属性值
+        
+Dom4j解析：
+//1.将dom4j.jar导入到项目中
+//2.获取Document对象(dom4j包下的类)
+   SAXReader reader=new SAXReader();
+   File f=new File("xml文件路径");
+   Document doc=reader.read(f);
+//3.开始解析：
+   常用方法：
+      获得根标签：getRootElement();
+      获得子标签集合：elements();
+      获得标签名字：getName();
+      获得标签中的文本：getText();
+      获得标签中的指定属性：attribute(String 属性名)
+      获得标签中的所有属性：attribute():List
+小结：dom4j解析时使用的类：
+     Document,Element,Attribute
+练习：(1)使用dom4j解析电影的xml文件
+      (2)将超市管理系统中的商品信息已xml文件的形式保存
+         然后将内容解析出来显示到控制台
+              
+         
+                                </pre>
+	<script type="text/javascript">
+	
+	</script>
+
+
+</body>
+</html>

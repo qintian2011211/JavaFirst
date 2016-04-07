@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<title>html</title>
+		<meta name="Keywords" content="keyword,keyword">
+		<meta name="description" content="">
+
+		<!--css,js-->
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{margin:100px;background:#111;font-size:14px;font-family:"微软雅黑";font-weight:600;color:#F1F1F1}
+		</style>
+
+	</head>
+<body>
+	<pre>
+	1.集合
+ List（ArrayList,LinkedList）
+ set  (HashSet)
+ Map  （HashMap）
+ <1>实现类
+ <2>存储特点
+ <3>set集合的遍历方式
+   foreach,迭代器
+   Iterator it= set集合对象.iterator();
+   while(it.hasNext()){
+       Object obj=it.next();
+   }
+ <4>map存储方式  
+   key->value
+ <5>三大集合的常用方法
+（2）泛型
+public interface 接口名<T>{}
+ (3)io,序列化和反序列化
+   字节流：
+      FileInputStream,FileOutputStream
+   字符流：
+     BufferedReader ,BufferedWriter
+   序列化和反序列化
+   ObjectOutputStream(序列化)->writeObject(Object obj)
+   ObjectInputStream(反序列化)->readObject()  
+   
+   
+ 反射：
+   概念：通过一个类的完整路径,进而获得类中的属性
+         方法，构造方法。
+         在编译时不确定哪个类被加载，
+         而在程序运行时才加载、探知、使用。
+   使用的类：
+     Class(表示整个类),
+     Field(表示属性),
+     Method(表示方法),
+     Contructor(表示构造方法)
+   实现步骤：
+     (1)先获得Class类的对象：
+        Class cla=
+            Class.forName("要被反射的类的完整路径");  
+      示例：Class.forName("test.Student");
+     (2)调用方法获得类中的属性，方法，构造方法
+         Field[] f=cla.getDeclaredFields();//获得属性数组
+         Method[] m=cla.getDeclaredMethods();//获得方法数组
+         Contructor[] cons=
+           cla.getDeclaredContructors();//获得构造方法数组
+  -----------------------------------------------------------
+    //1.创建对象(调用构造方法)--有参，无参构造
+     //a.调用无参构造：
+        Class cla=Class.forName("类的路径");
+        Object obj=
+          cla.newInstance();//默认调用无参构造创建对象
+     //b.调用指定的有参构造
+     Constructor con=
+        cla.getConstructor(new Class[]{class类型值});  
+      注：每个数据类型都有class属性
+    示例： 
+     Constructor con=
+      cla.getConstructor(new Class[]{String.class,int.class});
+     //得到构造后,调用创建对象的方法，并传入值
+    //Object obj= con.newInstance(new Object[]{值列表});    
+    示例：
+     Object o=con.newInstance(new Object[]{"a",10});
+    ---------------------------------------------------------
+    //2.给属性赋值和取值
+    //(1)创建反射类的对象(通过构造)
+    //(2)获得指定的属性对象
+       Class cla=Class.forName("");
+       Field f=cla.getDeclaredField("属性名");
+    //(3)调用方法对对象和属性进行赋值
+       常用方法：
+         //对基本数据类型属性赋值   
+          setXXX(Object obj,Object value);//obj表示对象名
+         //对引用数据类型属性赋值
+          set(Object obj,Object value);
+         //获得引用数据类型属性的值
+           get(Object obj)
+         //获得基本数据类型属性的值
+           getXXX(Object obj)
+         //修改私有属性的修改权限
+           setAccessible(true);//true表示可以修改
+      示例：
+         f.set(对象名,属性值);
+         f.get(对象名)       
+    
+    
+    //3.方法的调用               
+      //(1)获得Method对象
+      Method m=
+      cla.getDeclaredMethod(方法名);//调用无参方法
+      //调用有参方法
+      Method m1=
+       cla.getDeclaredMethod(方法名,Class类型的数组);
+      //(2)执行被调用的方法
+        m.invoke(Object obj);//执行无参方法，obj表示对象名
+        //执行有参方法，并将参数值传递给方法
+        m1.invoke(Object obj,Object[]);
+     注：invoke方法会把被执行方法的返回值返回过来 
+
+	</pre>
+
+
+
+	<script type="text/javascript">
+	
+	</script>
+
+
+</body>
+</html>

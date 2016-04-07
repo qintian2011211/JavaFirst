@@ -1,0 +1,286 @@
+<!doctype html>
+<html>
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<title>html</title>
+		<meta name="Keywords" content="keyword,keyword">
+		<meta name="description" content="">
+
+		<!--css,js-->
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{margin:100px;background:#111;font-size:14px;font-family:"微软雅黑";font-weight:600;color:#F1F1F1}
+		</style>
+
+	</head>
+<body>
+	<pre>复习：sql语句
+  1.创建数据库
+   create database 数据库名;
+  2.创建表：
+   create table 表名(
+     列名 数据类型[约束条件],
+     列名 数据类型[约束条件]
+   );
+   表名和列名自定义
+   数据类型：
+     int,float,double,char(长度),varchar(长度),date
+  3.对表操作：增删改查
+    (1)添加：
+     insert into 表名(列名) values(列值);
+     insert into 表名(列名) values(列值),(列值);
+     //特殊情况：省略列名
+     insert into 表名 values(列值);
+    (2)删除：
+      delete from 表名 where  限定条件
+      sql中的运算符：
+        算术运算符：+,-*,/,%
+        关系运算符：>,<,<=,>=,!=,<>,=
+        逻辑运算符：and ,or ,not 
+     示例：删除名字是张三的，并且性别是男的学生信息
+      delete from student where name='张三' and sex='男';    
+    (3)修改：
+     //更新单列
+     update 表名 set 列名=列值  where 限定条件
+     //更新多列
+     update 表名  set 列名=列值,列名2=列值2  where 限定条件
+    示例1：//将张三的性别改为女
+      update student set sex='女' where name='张三';
+      //将李四的年龄改为20,地址改为北京
+      update student set age=20,address='北京'
+      where name='李四';
+      //将名字是李四，性别是男的学生的年龄改为18
+      update student set age=18 
+      where name='李四' and sex='男';
+    (4)查询操作
+      select 列名  from  表名　where 限定条件
+      注：当查询的是所有列时，使用*号代替
+          当查询多列时，使用逗号间隔
+      示例：
+        //查询student表中的所有数据
+        select  * from student;
+        //查询学生表中的学生姓名和年龄
+        select name,age  from student 
+        //查询性别是男的学生信息
+        select * from student where sex='男';
+   
+查询：
+
+   
+  （1）  查询语法：   
+        select 列名
+        from 表名
+        where 限定条件
+        order by 排序的列名 asc/desc;
+        说明：asc表示升序，desc表示降序，二选其一
+    示例：//查询学生表中的信息，并按照分数降序排序
+         select *
+         from student
+         order by score desc
+         
+    (2)给列起别名： 列名 as 别名
+       注：只是修改虚拟表中的列名
+       示例：
+         select name as 姓名,age as 年龄
+         from student
+       说明：as可以省略，但是列名和别名之间要用空格间隔
+    (3)查询null值： 列名 is null
+      示例：select * from student where name is null;
+    (4)常量列：列值  as 列名
+    示例：查询学生分数以及总分
+    (数据库实际存在的列：name,java,mysql)
+    select java,mysql,name,java+mysql as 总分 
+    from student;  
+    (5)分页查询:
+     语法：
+         select 列名
+         from 表名
+         where 限定条件
+         order by 排序的列 asc/desc
+         limit 开始下标,显示条数
+         注：数据的下标从0开始
+     示例：
+      //查询学生信息,从第一条数据开始，显示4条
+       select * from student limit 0,4;  
+      要求：有20条数据，每页显示3条
+      count 总条数  pageIndex 页码  pageSize 显示条数
+      pageCount 总页数
+      总页数多少?
+         pageCount=
+           count%pageSize>0?count/pageSize+1:count/pageSize
+      第一页：limit 0,3
+      第二页：limit 3,3 
+      第三页：limit 6,3 
+      第四页：limit 9,3 
+       limit  (pageIndex-1)*pageSize,pageSize
+       
+      三目运算符：
+         条件?代码1:代码2;
+      运行过程：条件为true时，运行代码1
+                      false， 运行代码2       
+       
+练习题：    
+    scores
+     stuid int 学生id
+     java  int java成绩
+     mysql int mysql成绩
+     stuname varchar(20) 学生姓名
+  数据：
+      1  67 78 张三
+      2  87 55 李四
+      3  66 90 王五
+      4  98 78 赵六
+      5  80 88 田七
+  需求：
+    (1)对java成绩进行降序排序
+       select java
+       from scores
+       order by java desc
+    (2)得到mysql成绩前三名
+      select *　from  scores
+      order by mysql desc
+      limit 0,3     
+    (3)得到java学生中最后一名的学生信息  
+       select * from scores
+       order by java asc
+       limit 0,1     
+    (4)查询出两门成绩都优秀(>=80)的学生姓名  
+       select stuname from scores
+       where java>=80 and mysql>=80       
+    (5)查询出成绩在90分以上(>=90)的学生信息   
+       select * from scores
+       where java>=90 or mysql>=90     
+    (6)查询出每名学员的java,mysql,总成绩
+       select  java,mysql,stuname,java+mysql as 总分
+       from scores;       
+    (7)显示出每名学生的总分以及姓名   
+       select mysql+java as 总分,stuname
+       from scores;       
+      
+      
+ (6)多列排序：
+    order by 列名1 asc/desc , 列名2 asc/desc 
+    排序规则：先按照列名1中的值进行排序，
+              如果列名1中出现相同值时,按照列名2的
+              排序规则进行排序
+ (7)去除列中的重复数据：
+     distinct 列名
+   示例：
+     select distinct name from scores;
+ (8)模糊查询(作为条件进行使用)
+     列名 like 表达式
+   注：<1>表达式必须是字符串,需要使用单引号引起来
+       <2>通配符：
+           _(下划线):表示单个字符
+                   %:0-多个字符
+   示例：//查询姓张,并且两个字的用户信息
+      select * from user where name like '张_';  
+ (9)在某个区间内：
+      列名  between 开始值  and  结束值;
+    注：<1>包含开始和结束的临界值
+        <2>开始值必须小于结束值
+    示例：
+      select name from score
+      where java between 70 and 90;
+      等价于：
+       select name from score
+       where java>=70 and java<=90
+  (10) in 在某个范围内
+     语法： 列名 in (范围值);
+     注：多个范围值使用逗号间隔
+     示例：
+ //查询班级名称(gradename)是一班或者二班的学生信息(student表)
+    select *　from student
+    where gradename='一班' or gradename='二班';  
+   等价于：
+     select * from student
+     where gradename  in ('一班','二班');                          
+   (11)聚合函数：
+     作用：用于计算一组值，并返回最后的计算结果
+     种类：
+       sum(列名)--求和
+       avg(列名)--求平均值
+       max(列名)--最大值
+       min(列名)--最小值
+       count(列名)--总行数(总条数)
+      注：count(列名)计算值和列名无关，所以这里的
+          列名可以使用*代替，即count(*)
+     示例： 
+       select max(java),sum(java),avg(java),min(java),
+              count(*) from scores;
+    (12)分组查询：group by 被分组的列
+      示例：
+        select count(*) as 人数,gradeid
+        from scores
+        group by gradeid
+      注：如果查询语句中包含分组操作，
+         那么select后面能添加的内容只有：
+          聚合函数(max(),avg(),min(),sum(),count())
+          和被分组的列名
+      小结：
+        select  列名
+        from 表名
+        where 分组前的限定条件
+        group by 被分组的列
+        having 分组后的限定条件
+        order by 排序的列 asc/desc
+        limit 开始位置,显示条数
+     注：having不会单独出现,必须和group by 一起出现
+      示例：
+       //统计年级人数大于15人的年级
+       select count(*) as 人数,grade
+       from student
+       group by grade
+       having 人数>15  
+        
+           
+         
+                                            
+                       
+     
+        
+        
+        
+     
+   测试数据：
+    郭敬明 1371234567 北京 java   S1101 89 1979-04-05
+    张三丰 1372839201 上海 数据库 S1102 67  1967-09-07
+    赵敏   1387839201 山东 mysql  S1103 99  1987-09-07  
+Student2
+    stuname 姓名  varchar(20)
+    telphone 电话 varchar(20)
+    address  住址  varchar(20)
+    subject  科目 varchar(20)
+    stuNo    学号 varchar(20)
+    score    成绩  int
+    birthday 出生日期  date 
+ b.查询名称中含有“数据库”字样科目信息
+   select * from student2
+   where subject like '%数据库%';
+ d.查询姓姜的，三个字的学生信息
+   select *　from student2
+   where stuname like '姜__';
+ e.查询学号为S1101的指定java,mysql科目考试成绩
+  select score,subject   from student2
+  where stuno='s1101' and subject in('java','mysql');
+ f.查询出80后学员信息
+   select * from student2
+   where birthday>='1980-01-01' and birthday<='1989-12-31';
+ g.查询出家庭住址在北上广的学生名字 
+   select stuname from student2
+   where address in ('北京','上海','广州');
+ h.显示成绩在第5-10名的学生名字和电话
+   select stuname,telphone from student2
+   order by score desc
+   limit 4,6;
+
+</pre>
+	<script type="text/javascript">
+	
+	</script>
+
+
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<title>html</title>
+		<meta name="Keywords" content="keyword,keyword">
+		<meta name="description" content="">
+
+		<!--css,js-->
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{margin:100px;background:#111;font-size:14px;font-family:"微软雅黑";font-weight:600;color:#F1F1F1}
+		</style>
+
+	</head>
+<body>
+	<pre>复习：
+ 继承：extends
+ 作用：使代码可以实现复用
+ 方法重写：
+    在子类中的,定义了和父类相同的方法
+    要求：方法名,参数列表必须相同
+          返回值类型相同或者其子类
+          不能缩小被重写方法的访问权限、
+多态：
+  (1)使用场合：
+     将父类作为方法参数或方法的返回值类型
+  (2)使用目的：
+     提高方法的扩展性
+  (3)定义多态示例代码时必须遵循三点：
+     1.继承关系
+     2.方法重写
+     3.定义将父类作为参数的方法
+  (4)向上/向下转型
+   向上：父类  对象名=new 子类();
+   向下: 子类 对象名=(子类)父类的对象名;
+   注:防止向下转型时，转换成无效子类：
+      使用instanceof关键字,用来判断对象和类是否存在关系
+   示例:
+    Father s=new Son();
+    if(s instanceof Son){}
+    报错：classCastException（类型转换异常）
+
+抽象类和抽象方法：使用abstract关键字修饰方法和类
+示例：
+  public abstract class Student{
+     public abstract void test();
+  }
+小结：
+  抽象方法没有方法体，连大括号都没有
+  有抽象方法的类是抽象类，但是抽象类中不一定有抽象方法
+抽象类的优点：
+    保证了子类独有的行为
+【练习题】抽象类：
+创建一个Vehicle类并将它声明为抽象类。
+在Vehicle类中声明一个NoOfWheels方法，
+使它返回一个字符串值。
+创建两个类Car和Motorbike从Vehicle类继承，
+并在这两个类中实现NoOfWheels方法。
+在Car类中，应当显示“四轮车”信息；
+而在Motorbike类中，应当显示“双轮车”信息。
+创建另一个带main方法的类，
+在该类中创建Car和Motorbike的实例，
+并在控制台中显示消息。 
+
+
+接口：
+  作用：定义一系列方法组成"约定"
+  语法:
+    //定义接口：
+      public interface 接口名{
+         //抽象方法
+      }
+   注：接口中定义的方法只能是抽象方法
+   //创建实现类
+    public class 实现类类名 implements 接口名{
+       //实现接口中的方法
+       //普通方法
+    }
+创建实现类对象的格式：
+ 接口名 对象名=new 实现类类名();
+     
+对比抽象类和接口:
+  相同点：不能实例化，只能声明
+  不同点：
+     抽象类中可以有抽象方法和普通方法
+     接口中只能定义抽象方法，所以abstract可以省略
+注：
+  java是单继承,多实现。先继承后实现
+  多个接口之间使用逗号间隔
+       
+     
+复习：     
+ (1)创建类：
+    public class 类名{
+       //属性:  访问修饰符  数据类型  属性名;
+       //方法定义：
+       访问修饰符  返回值类型  方法名(参数列表){
+          //方法体
+       }
+     //返回值类型：
+     //分类：有返回值(java中的数据类型) 
+      注:方法体中必须有return  
+     //无返回值(void)  
+    }
+ (2)创建对象
+    类名 对象名=new 类名();
+    调用属性：对象名.属性名=属性值;
+    调用方法：对象名.方法名();
+    注：当调用有返回值方法时，需要使用变量接收返回结果
+ (3)构造方法
+     访问修饰符  类名(参数列表){}
+    注:如果自定义构造方法，则需要补充一个无参构造
+ (4)java的三大特性：
+  <1>封装：将属性私有化，提供公有方法访问私有属性
+     作用：提高属性的安全性
+     示例：
+      private  String name;
+      //赋值
+      public void setName(String name){
+        this.name=name;
+      }
+      //取值
+      public String getName(){
+         return name;
+      }
+  <2>继承：将子类公有的属性和方法放置到父类中
+    实现：public class 子类名 extends 父类名{
+            //定义属性和方法
+          }
+    作用:实现代码的复用
+ <3>多态:使用同一引用,传递不同实例,从而实现不同效果
+    作用：实现代码的扩展性
+    使用场合：
+      1.将父类或接口作为参数或返回值类型进行使用
+      2.在定义对象时，声明父类或接口，传递
+        子类或实现的对象
+    示例代码：
+       (1)继承关系(2)方法重写(3)将父类作为参数
+       public class Father{
+          public void sing(){};
+       }
+       public class Son1 extends Father{
+          public void sing(){
+            System.out.println("son1");
+          }
+          
+          //多态
+          public void toSing(Father f){
+              f.sing();
+          }
+       }
+       //测试类：
+        Father f=new Son1();        
+        Son1 s=new Son1();//调用toSing()方法
+        s.toSing(f);
+        
+ 抽象类和接口：
+  相同点:用来定义抽象方法
+  不同点：1.抽象类中包含普通方法和抽象方法
+           接口中只定义抽象方法
+          2.抽象类使用abstract修饰class
+            接口使用interface,由实现类实现具体操作
+java中可以单继承多实现 
+注：先定义接口，然后再创建实现类：
+    public interface 接口名{}
+    public class　实现类名 implements 接口名{}           
+                     
+                  
+               
+
+
+
+
+
+     
+    
+
+</pre>
+	<script type="text/javascript">
+	
+	</script>
+
+
+</body>
+</html>

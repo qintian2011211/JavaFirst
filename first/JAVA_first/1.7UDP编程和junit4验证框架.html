@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<title>html</title>
+		<meta name="Keywords" content="keyword,keyword">
+		<meta name="description" content="">
+
+		<!--css,js-->
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{margin:100px;background:#111;font-size:14px;font-family:"微软雅黑";font-weight:600;color:#F1F1F1}
+		</style>
+
+	</head>
+<body>
+
+	<pre>
+	1.基于UDP协议编程
+  特点：只负责发送数据，不负责数据是否被接收
+        安全性较低
+  实现方式：
+  (1)发送方
+    //1.创建DatagramSocket,不需要指定端口号
+    DatagramSocket socket=new DatagramSocket();
+    //2.创建数据包：DatagramPacket
+    InetAddress ia=InetAddress.getByName("接收方的ip地址");
+    DatagramPacket dp=
+      new DatagramPacket(字节数组,长度,ia,端口号);
+    //3.发送数据
+      socket.send(dp);
+  (2)接收方
+    //1.创建DatagramSocket,要指定端口号
+    DatagramSocket socket=new DatagramSocket(端口号);
+    //2.创建DatagramPacket
+    DatagramPacket dp=new DatagramPacket(字节数组,数组长度);
+    //3.接收数据
+    socket.receive(dp);
+    //4.将字节数组转换成字符串
+    String s=new String(dp.getData(),0,dp.getLength());
+    
+补充：当建立好一次连接之后,返回响应信息时不需要指定端口号
+   SocketAddress address=dp.getSocketAddress();
+   dp=new DatagramPacket(字节数组,字节长度,address);    
+  说明：dp是DatagramPacket的对象。
+
+
+使用java中的junit4验证框架：
+ 1.给项目中添加框架包：
+   项目->右键"build path"->add libraries->
+   junit->junit4    
+ 2.使用@Test标记要验证的方法
+   注:
+    (1)被验证的方法必须是无返回值，无参数
+    (2)运行指定的方法，只需要选中方法名，然后运行  
+    
+    
+ 本章重点：TCP UDP 进行开发,junit测试
+  重点：(1)基于TCP实现网络对象的传输
+           传输内容：
+             对象，集合，字符串等
+        (2)掌握UDP开发实例
+             
+             
+
+    
+    
+    
+    
+    
+    
+      </pre>
+	
+	<script type="text/javascript">
+	
+	</script>
+
+
+</body>
+</html>

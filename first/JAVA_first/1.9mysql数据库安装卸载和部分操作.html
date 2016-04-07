@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<title>html</title>
+		<meta name="Keywords" content="keyword,keyword">
+		<meta name="description" content="">
+
+		<!--css,js-->
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{margin:100px;background:#111;font-size:14px;font-family:"微软雅黑";font-weight:600;color:#F1F1F1}
+		</style>
+
+	</head>
+<body>
+	<pre>1.dom4j写入文件步骤：
+ //1.获得Document对象
+ //2.开始解析
+ //3.常用方法:
+     addElement("标签名")：添加标签
+     setText("文本内容"):给标签添加内容
+     addAttribute("属性名","属性值")：给标签添加属性
+     remove(标签对象):删除标签，由被删除标签的父标签调用
+ //4.重新将Document对象写入到文件中
+   OutputFormat format=OutputFormat.createPrettyPrint();
+   format.setEncoding("GBK");
+   XMLWriter writer=
+      new XMLWriter(new FileWriter("xml文件路径"),format);
+   writer.write(Document对象);
+   writer.close();
+
+1-22下午：
+1.
+  内存,持久化保存(txt,xml)--数据量少
+2.数据库(保存数据量较多时使用)
+  mysql,oracle,sqlServer
+3.mysql的安装和卸载、(sql语句)
+  两种实现方式:(1)命令行(2)图形化
+ （1）创建数据库
+   create database 数据库名;
+ （2）创建表 
+   语法：
+     create table 表名(
+        列名  数据类型 [约束条件],
+        列名2  数据类型 [约束条件]
+     );
+   注：约束条件可有可无
+       表名和列名是自定义的,不要使用中文命名
+  数据类型：
+    整数：int,smallint,bigint
+    小数：float,double
+    字符串：char(长度值)
+          varchar(长度值)
+        表示可以存放多长的文本
+        区别：
+           char(5):'ab_ _ _'//内容不够,使用空格占位 
+           varchar(5)'ab'   //内容多少就开辟多大空间
+    日期：date(年月日),time(时分秒),datetime(年月日时分秒)
+    大数据类型：blob,clob
+    大文本类型：text
+示例：
+    学生表：
+        姓名：varchar(10)
+        性别：char(2)
+        年龄：int
+        学号：varchar(10)
+    create table student(
+       name varchar(10),
+       sex  char(2),
+       age int,
+       stuno varchar(10)
+    );  
+    注：最后一列不需要指定逗号                    
+    切换数据库：use 数据库名;
+    注释：-- 注释内容
+练习：
+   创建班级信息表：grade
+      班级编号   gradeno
+      班级名称   gradename
+      人数       count
+      班主任姓名 banname 
+      教师姓名   teachername
+    create table grade(
+       gradeno  varchar(10),
+       gradename varchar(10),
+       count int,
+       banname varchar(10),
+       teachername varchar(10)
+    );     
+   创建工资表： salary 
+      姓名    name
+      部门名称  deptname  
+      基本工资  basesalary
+      岗位工资  titlesalary
+      扣税      shui
+      保险金额  baoxian
+     create table salary(
+        name varchar(10),
+        deptname varchar(10),
+        basesalary int,
+        titlesalary int,
+        shui   double,
+        baoxian double
+     );
+  (3)添加数据
+《1》 语法：
+     insert into 表名(列名) values(列值);
+ 注：
+   <1>多个列名或列值之间使用逗号间隔
+   <2>列名和列值是一一对应的
+   <3>添加列值时，如果该列的数据类型是字符串或日期格式
+      则列值两侧需要添加单引号
+ 示例：
+   insert into student(name,age,birthday)
+   values('张三',18,'1990-1-1');
+《2》多条语句添加
+   insert into 表名(列名) values(1组列值),(2组列值);
+ 示例：
+   insert into student(name,age,birthday)
+   values('张三',18,'1990-1-'),
+         ('李四',20,'1991-1-1');
+练习：
+   创建员工表：
+      姓名：
+      年龄:
+      生日：
+      性别：
+      住址：
+      联系方式：
+      create table employee(
+         name varchar(10),
+         age int,
+         birth  date,
+         sex char(1),
+         address varchar(20),
+         telphone varchar(20)
+      );
+      
+  张三  26  1990-1-1 男  北京  10086
+  李四  16  2000-1-1 女  南京  10010
+  王五  20  1996-1-1 男  上海  12306
+  insert into employee(age,name,birth,sex,address,telphone)
+  values(26,'张三','1990-1-1','男','北京','10086');
+  
+   insert into employee(name,age,birth,sex,address,telphone)
+   values('李四',16,'2000-1-1','女','南京','10010'),
+     ('王五',20,'1996-1-1','男','上海','12306') ;
+ 《3》当给表中的所有列添加数据时,列名可以省略，
+      此时,列值的顺序要和创建表时,列名的顺序一一对应
+   示例：
+    insert into employee 
+    values('王五',20,'1996-1-1','男','上海','12306') ;
+  
+  (4)删除数据
+    语法：
+      delete from 表名 where 限定条件
+   补充：
+    mysql中的运算符：
+    <1>关系运算符
+       = (赋值/等于)
+       >,<,>=,<=,!=,<>
+    <2>算术运算符：
+        +,-,*,/,%
+    <3>逻辑运算符：
+       and(并且) or(或者)  not(取非)
+   示例：删除学生表中张三的信息
+   delete from student where  name='张三'：
+  注：删除或添加时，数据库会返回受影响的行数,
+      所以，可以通过受影响的行数值判断执行结果是否成功。           
+        
+复习内容：
+   1.封装，继承，多态
+   2.接口和抽象类，实现类
+   3.集合(List,set,Map)
+   4.工具类：Math,Date,String,StringBuffer
+   5.io流读取文件中的字节，字符
+   6.io流读取文件中的对象和集合
+   7.使用反射读取类中的属性，方法，构造方法，
+     并通过构造方法创建对象，给属性赋值，执行方法
+   8.注解的使用
+   9.基于TCP的网络编程，客户端和服务器端的建立
+     实现双方对象信息的传输
+   10.dom4j对xml文件的增删改查
+      </pre>
+	<script type="text/javascript">
+	
+	</script>
+
+
+</body>
+</html>

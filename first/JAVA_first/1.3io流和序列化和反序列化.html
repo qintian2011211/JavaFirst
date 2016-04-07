@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<title>html</title>
+		<meta name="Keywords" content="keyword,keyword">
+		<meta name="description" content="">
+
+		<!--css,js-->
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{margin:100px;background:#111;font-size:14px;font-family:"微软雅黑";font-weight:600;color:#F1F1F1}
+		</style>
+
+	</head>
+<body>
+	<pre>
+	复习：
+1.三大集合的对比
+List,set,map
+2.泛型
+3.java的工具类(实用类)
+  (1)枚举类型
+  (2)Math
+  (3)Random
+  (4)String,StringBuffer
+  (5)Date
+  (6)Calendar
+
+1-15：  
+Io流:输入流(InputStream)和输出流(OutputStream)
+目标：持久化保存数据(永久性保存数据)
+1.File类：
+  作用：操作文件或者文件夹
+  对象创建：
+     File file=new File("文件或文件夹的目录");
+  示例：
+     File f=new File("d://test//test.java");//文件
+     File f1=new File("d://test");//目录
+  常用方法：
+     mkdir():创建一个文件夹
+     mkdirs():同时创建多级文件夹目录
+     exist():判断文件/目录是否存在
+     createNewFile():创建文件
+2.io流的超类(父类):
+  按流向分：
+    输入流：InputStream,Reader
+    输出流：OutputSteam,Writer
+  按操作数据分：
+    字节流:InputStream,OutputStream
+    字符流：Reader,Writer
+3.字节输入流(FileInputStream)
+  //1.创建对象
+  FileInputStream fis=new FileInputStream("文件路径");
+  //2.调用读数据的方法:read(),当读到没有数据时，返回-1
+  int num=fis.read();
+  while(num!=-1){
+     syso(num);
+     num=fis.read();
+  }
+  //3.关流
+  fis.close(); 
+  
+4.字节输出流：FileOutputStream             
+   //1.创建对象
+   FileOutpustStream out=new FileOutputStream("文件路径");
+   //2.定义输出内容
+   String str="";
+   out.write(str.getBytes());//输出一个字节数组
+   //3.关闭流
+   out.close();
+   
+5.字符输入流:BufferedReadr
+ //1.创建BufferedReader和FileReader对象
+ FileReader in=new FileReader("文件路径");
+ BufferedReader br=new BufferedReader(in);
+ //2.调用方法：readLine()--每次读取一行
+   String str=br.readLine();
+   while(str!=null){
+      syso(str);
+      str=br.readLine();
+   }   
+//3.关流
+  br.close();
+  in.close();
+
+6.字符输出流：BufferedWriter
+  //1.创建FileWriter,BufferedWriter对象
+  FileWriter fw=new FileWriter("文件路径");
+  BufferedWriter bw=new BufferedWriter(fw);
+  //2.调用方法
+  bw.write(String str);
+  bw.newLine();//换行
+  fw.flush();//刷新缓冲区
+  fw.close();//关闭流
+  
+7.序列化和反序列化：
+ (1)将要序列化的对象所在的类实现Serializable接口
+ 示例:
+   public class Student implements Serializable{}
+ (2)测试代码中创建ObjectOutputStream对象
+  FileOutputStream fos=
+           new FileOutputStream("文件路径");
+  ObjectOutputStream oos=
+           new ObjectOutputStream(fos);
+  (3)调用序列化方法：writeObject(Object obj)
+    注：序列化时可以序列化单个对象或者集合
+  (4)关流
+     oos.close();
+     fos.close();  
+    
+ 8.反序列化:
+   (1)创建反序列化对象：ObjectInputStream
+    FileInputStream fis=
+           new FileInputStream("文件路径");
+    ObjectInputStream ois=
+           new ObjectInputStream(fis);
+    (2)调用反序列化方法：readObject();
+     Object obj= fis.readObject();  
+    (3)关流：
+       ois.close();
+       fis.close();
+小结：
+  序列化：将内存中的对象或集合保存到文件中的过程
+反序列化：将文件中的对象或集合读取到程序中的过程
+                  
+               
+   
+ 
+</pre>
+	<script type="text/javascript">
+	
+	</script>
+
+
+</body>
+</html>

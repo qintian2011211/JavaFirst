@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<title>html</title>
+		<meta name="Keywords" content="keyword,keyword">
+		<meta name="description" content="">
+
+		<!--css,js-->
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{margin:100px;background:#111;font-size:14px;font-family:"微软雅黑";font-weight:600;color:#F1F1F1}
+		</style>
+
+	</head>
+<body>
+	<pre>
+	复习：
+ 1.注解：
+    (1)内建注解(2)元注解(3)自定义注解
+ 2.线程：   
+   (1)如何创建线程：
+      <1>继承Thread类
+      <2>实现Runnable接口
+    注：1.启动线程使用start();
+        2.如果使用的是实现接口的方式
+          创建Thread对象，将实现类的对象作为参数传入
+         Thread th=new Thread(new 实现类());  
+    (2)常用方法：
+       join();
+       sleep();
+       setPriority(优先级)
+       yield()  
+       setName("")设置线程名称
+       Thread.currentThread().getName();获得线程名字
+       wait();//线程等待
+       notify()/notifyAll() 启动因调用wait()方法而等待的线程
+    (3)线程同步:synchronized   
+      概念：在同一时间，只能有一个线程访问
+        《1》同步方法
+         public synchronized 返回值类型 方法名(){}
+        《2》同步代码块
+          synchronized(this){
+             //同步代码
+          }
+ 
+ 十进制->二进制:
+   10，255
+      十进制:  128  64   32   16   8  4  2  1 
+      二进制：  0    0    0   0    1  0  1  0
+                1    1    1   1    1  1  1  1   
+cmd网络命令：
+ ipconfig:获得本机的ip地址
+ ping 目标ip  :测试与目标地址的网络连通
+           
+网络编程：
+  实现原理:通过网络，实现多电脑或多项目之间的信息传输
+  实现方式：通过套接字(socket)实现
+  socket的作用：
+    类似于快递点,将要发送的数据进行接收和发送。
+  代码实现：
+    (1)客户端：创建socket对象,然后将数据以流的方式写入或读取
+        //1.
+        Socket s=new Socket("服务器ip",端口号);
+       //2.获得流：
+      InputStream is=s.getInputStream();
+      OutputStream out=s.getOutputStream();
+    (2)服务器端：创建ServerSocket对象，
+                通过该对象获取socket对象
+         //1.
+         ServerSocket server=new ServerSocket(端口号);     
+         //2.获得socket
+         Socket s=server.accept();
+         //3.通过socket获得输入输出流
+     补充：
+     //获得发送方的ip地址
+     socket.getInetAddress().getHostAddress()    
+         
+  练习：客户端给服务器端发送一条数据，内容自拟。
+  扩展：服务器端返回数据给客户端          
+      
+1-19下午:
+  使用网络编程发送对象
+(1)客户端：
+   使用ObjectOutStream类发送对象
+   示例代码：
+     //1.创建socket
+     //2.通过socket获得输入输出流
+     //3.将输出流封装到ObjectOutputStream
+     ObjectOutputStream oos=
+         new ObjectOutputStream(OutputStream out);
+     oos.writeObject(Object obj);
+(2)服务器端：
+  使用ObjectInputStream接收对象
+   //1.先创建ServerSocket 
+   //2.获得socket对象
+   //3.创建ObjectInputStream对象
+   //4.读取Object对象:readObject();            
+练习：实现一个用户登录，服务器端将登录结果返回给客户端。 
+注：传递的对象必须实现序列化接口
+    传递的对象所在的类,客户端和服务器端都要保证类的路径一致                  
+	
+	</pre>
+	<script type="text/javascript">
+	
+	</script>
+
+
+</body>
+</html>

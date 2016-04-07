@@ -1,0 +1,39 @@
+<pre>
+package com.qt.fuwuqi;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class FuWuQi {
+
+	public static void main(String[] args) {
+		System.out.println("这是服务器");
+		ServerSocket server=null;
+		try {
+			server = new ServerSocket(8080);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		while (true) {
+			try {
+				
+				Socket socket=server.accept();
+				FuWuQi_Thread fth=new FuWuQi_Thread(socket);
+				fth.start();
+				
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+			
+			
+		
+	}
+
+}
+</pre>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<title>html</title>
+		<meta name="Keywords" content="keyword,keyword">
+		<meta name="description" content="">
+
+		<!--css,js-->
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{margin:100px;background:#111;font-size:14px;font-family:"微软雅黑";font-weight:600;color:#F1F1F1}
+		</style>
+
+	</head>
+<body>
+	
+
+	<pre>
+	注解：
+ (1)注解概念：用于修饰数据的数据(元数据)
+ (2)注解的分类：
+    内建注解,元注解,自定义注解
+ (3)内建注解：
+       @Override  --标记重写
+       @Deprecated --标记已过时
+       @SuppressWarnings  --抑制编译器检查(去除黄叹号)
+ (4)元注解：用于修饰注解的注解，多和自定义注解一起使用
+ (5)自定义注解：
+    语法：
+      public  @interface 注解名{
+         //定义变量
+      }       
+    注：定义变量时，变量名后要加()
+        给变量赋值使用default关键字
+   示例：
+     public @interface myAnn{
+       String name() default "张三";
+     }
+   注：如果定义的注解没有给定默认值，则
+       必须在调用的时候给定默认值。       
+        
+        
+    //自定义一个注解（sqlAnnotation）,
+//包含一个数据库字符串变量( dbConn )
+//定义一个方法,读取注解信息，判断注解中使用哪个数据库
+//最终：实现连接不同的数据库    
+
+
+线程：
+   (1)一个进程中至少包含一个线程
+   (2)线程的实现方式：
+      <1>继承Thead类
+      <2>实现Runnable接口
+   注：都需要重写run()方法，需要在线程中执行的代码
+       定义在run()方法中
+   《1》继承
+     public class 线程类  extends Thread{}
+     测试时创建线程类对象，调用start()方法启动线程
+   《2》实现类
+     public class 线程类 implements Runnable{}
+     测试时，创建Thead对象，然后将线程类对象作为参数传入
+      然后调用start()方法
+    示例：
+        Thread t=new Thread(new 线程类());
+   补充：多个线程之间的优先级,最终决定于电脑分配的优先级  
+   获得当前线程的名称：
+    String name=Thread.currentThread().getName();   
+            
+    (3)线程的生命周期：
+      新生状态，可运行状态，阻塞状态，死亡状态
+    (4)线程常用方法
+      a. 设置线程优先级方法：
+         setPriority(优先级值)：线程对象的方法
+         优先级：1-10,值越大，优先级越高，默认为5
+      b. join()或join(long 毫秒值)
+         线程对象.join()
+         作用：将另一线程插入到指定线程中，等待
+               指定线程执行完毕。
+         示例：
+            for(int i=0;i<5;i++){
+               if(i==1){
+                 线程对象.join();
+               }
+            } 
+      c. sleep(long 毫秒值)
+      注：由Thread调用
+      作用:将线程进入到睡眠状态(不可运行状态)
+      d:线程同步：
+        作用：使某段程序在同一时间只能有一个线程访问。
+        实现方式：
+         (1) 同步方法
+         示例:
+           public synchronized void a(){}
+         (2) 同步代码块
+         示例：
+           public void a(){
+             synchronized(this){
+               //代码
+             }
+           }
+           </pre>
+	<script type="text/javascript">
+	
+	</script>
+
+
+</body>
+</html>

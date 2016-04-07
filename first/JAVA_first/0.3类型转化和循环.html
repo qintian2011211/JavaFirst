@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<title>html</title>
+		<meta name="Keywords" content="keyword,keyword">
+		<meta name="description" content="">
+
+		<!--css,js-->
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{margin:100px;background:#111;font-size:14px;font-family:"微软雅黑";font-weight:600;color:#F1F1F1}
+		</style>
+
+	</head>
+<body>
+	<pre>·java逻辑之---选择结构
+
+复习
+java数据存储和简单运算
+·定义变量语法
+  数据类型 变量名 =值;
+·运算
+  +  "名字：*"+name+"*性别***年龄***"
+·获得系统输入
+  语法：
+
+主要内容：
+·类型转换  **
+判断
+·如果....
+·如果..否则..
+·如果...或者..否则
+·if的嵌套
+·switch做等值判断
+
+1. 类型转换
+·整数除以整数=整数，去掉小数部分！
+   sys...(3/2) ---> 1
+·整数/小数---->小数
+  sys....(3/2.0)-->1.5
+·int a = 3.4; 报错！
+产生以上现象的原因：java数据类型范围有大，有小！
+  小自动转大！！！
+  大转小-->强制完成！
+2.认识java所有的8种基本数据类型！
+基本数据类型
+整数4个： byte,short,int,long
+小数： float,double
+字符： char
+布尔： boolean(值true,false)
+引用数据类型(对象类型)
+
+double x =2; -->自动转化！
+int a = 3;
+  a= a+2.0; ==>报错！！
+  a +=2.0;  ==>不报错！+=自动带类型转化！
+int y = 3.5;
+强转语法：(要强转的类型)值
+int y=(int)3.5;
+
+自动类型转化条件
+(1)两个类型要兼容
+(2) 小转大...
+
+=-=-=-=-=- 2015/12/30 10:09:10 =-=-
+1.生活中对比结果为
+"真true或假 false"
+2. true或false 使用boolean变量存储！
+  boolean isOk= false;
+3.通过比较可以得到boolean
+  比较数学符号(逻辑符号):
+  >  < >=  <=  !=  三位运算符！
+  int a=3;
+  int b=4;
+  boolean isOk = a>b;
+
+4.比较的结果就应用在生活中各种判断中
+5.程序实现判断！！！
+·如果 (条件)
+   成立。。。。。。
+单if语法：
+ if(返回boolean的条件){
+     条件成立时各种代码。。。。
+ }
+·如果....否则...
+ if(条件){
+    成立时....	  
+ }else{
+    不成立。。。。。
+ }
+·判断嵌套！
+  判断内部，继续判断！
+  if(条件1){ if(条件2){...}  }
+  if(条件1){
+    if(条件2){。。}else{....}
+  }else{...}
+
+知识点：
+(1)字符串判断方法 equals()
+   String a = "zzy";
+   boolean isOk=a.equals("zhangsan");
+
+·多重判断（判断一个区间！）
+  生活中案例：成绩等级！
+  如果...或者...或者..否则！
+语法：
+if(条件1){
+ 成立....
+}else if(条件2){
+ 成立...
+}else if(条件3){
+ ....
+}
+....
+else{
+  上面所有提交都不成立执行！
+}
+
+【注意：建议范围从大到小判断！！】
+
+·多条件并列判断！
+  生活中多条件连接用：与，或，非
+  > < --->比较运算符！
+  与/并且 && 
+  或者    || 
+  非       ! 
+  与或非===>逻辑运算符！
+  yuwen>=90  || shuxue >=90
+·等值判断
+  生活场景：根据周几判断今天课程！
+switch-->开关！
+
+switch(常量){
+  case 值1:
+    代码1...
+    break;--->退出
+  case 值2：
+    代码2....
+    break;  
+  ....
+  default:    默认！！！
+     默认执行的代码....
+}
+注意：
+(1)常量必须是整数或char类型
+   jdk1.7以上，可以支持字符串！
+(2)程序遇到break才会停止！
+
+
+java做循环！！！
+循环语法
+for(初始变量;条件;变量迭代){
+  ....
+}
+变量的改变学名叫"迭代！"
+for(int i=0;i<10;i++){
+  ....
+}
+
+
+</pre>
+	<script type="text/javascript">
+	
+	</script>
+
+
+</body>
+</html>

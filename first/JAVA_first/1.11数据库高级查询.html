@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<title>html</title>
+		<meta name="Keywords" content="keyword,keyword">
+		<meta name="description" content="">
+
+		<!--css,js-->
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{margin:100px;background:#111;font-size:14px;font-family:"微软雅黑";font-weight:600;color:#F1F1F1}
+		</style>
+
+	</head>
+<body>
+	<pre>复习：
+  (1)增加：
+    insert into 表名(列名) values(列值);
+  (2)修改：
+    update 表名 set 列名=列值 where 限定条件;  
+  (3)删除：
+    delete from 表名 where 限定条件
+  (4)查询：
+     select 列名
+     from 表名
+     where 分组前的限定条件
+     group by 被分组的列
+     having 分组后的限定条件
+     order  by 排序的列 asc/desc
+     limit 开始位置，显示条数
+     注：having 出现的话，必须和group by 一起出现
+
+多表联查：
+ (1)分类：内连接(inner join),
+          外连接(left join,right join)
+ (2)内连接语法：
+    作用：查询多张表中有关系的数据
+    语法1：
+      select 列名
+      from 表1
+      inner join 表2
+      on 表1.列名=表2.列名
+    语法2:
+      select 列名
+      from 表1,表2
+      where 表1.列名=表2.列名
+    注：表1,表2顺序自定
+    示例：
+      select c.java,c.mysql,s.name
+      from student as s
+      inner join  score as c
+      on s.stuid=c.studentid;
+    等价于：
+     select c.java,c.mysql,s.name
+     from student as s, score as  c
+     where s.stuid=c.studentid;
+   注：
+    两张表的关系的建立，要求建立关系的列表达的含义是相同的;
+     
+ 三表联查：
+   select 列名
+   from 表1
+   inner join 表2 on 表1.列名=表2.列名
+   inner join 表3 on 表1或表2.列名=表3.列名
+等价于：
+   select 列名
+   from 表1,表2,表3
+   where 表1.列名=表2.列名 and 表1或表2.列名=表3.列名
+   注：虽然是三表联查，但不代表三张表中任意两张表都有关联
+      
+子查询：
+   将查询出的虚拟表的结果作为另一个查询语句的条件
+   或者是二次查询的基础表
+示例：
+//查询出分数大于90的学生姓名
+   select name from student 
+     where gradeid in (
+         select gid from score where 
+         score>90
+     );
+     
+外连接：
+  左外连：
+    select 列名
+    from  主表
+    left join 次表 on 主表.列名=次表.列名
+  右外连：
+    select 列名
+    from 次表
+    right join 主表 on 主表.列名=次表.列名：
+注：<1>主表的数据会全部显示，不管次表数据是否匹配
+    <2>主表和次表的顺序不能随意调换
+        
+补充：
+     select 列名
+     from 表1
+     inner join 表2 on  表1.列名=表2.列名
+     where 分组前的限定条件
+     group by 被分组的列
+     having 分组后的限定条件
+     order  by 排序的列 asc/desc
+     limit 开始位置，显示条数 
+表的约束条件
+  create table 表名(
+    列名 数据类型 [约束条件],
+    列名 数据类型 [约束条件]
+  );    
+约束条件：
+ (1)主键约束：primary key
+   主键列：设置了主键的列
+   主键列的特点：列值不允许重复和空值
+ (2)非空约束：not null
+   特点：设置完后，该列不允许有null值
+ (3)默认值：default
+   特点：在用户不指定值的情况下，执行默认的值
+ (4)自增长：auto_increment
+    特点：列值自动增长，应用在数值类型的列上，并且
+        和主键列一起使用
+ (5)唯一约束：unique
+   特点：列值不允许重复，但是允许为null
+   注：一张表中一般必须有一列作为主键列,用于标记
+       每行之间的区别，唯一键可以设置到多个列中,
+ (6)外键约束：foreign key
+    外键列：存放别的表中主键值的列
+    外键表：有外键的表
+    作用：限定只能引用别的表中的已经存在的主键值
+    外键名：fk_当前表名_外键列名
+          
+       
+总结：
+  (1)数据库安装和卸载
+  (2)sql语句
+    数据库操作语句(DDL):create语句                 
+    数据库表操作语句(DML):insert,delete,update,select
+    查询：
+       单表，多表(左外连，右外连，内连)
+jdbc:
+    java database connection    
+实现步骤:
+（1）1.将连接的jar包导入到项目中
+(2)关键代码：
+     //1.加载驱动
+      Class.forName("com.mysql.jdbc.Driver");    
+     //2.获得连接：
+     String url="jdbc:mysql://localhost/数据库名";
+     String username="";//用户名
+     String password="";//密码
+     Connection con=
+       DriverManager.getConnection(url,username,password); 
+    //3.获得状态通道对象,通过该对象发送sql语句
+     Statement st=con.createStatement();    
+     String sql="";
+    //调用方法执行sql,
+    //当sql为查询语句时，执行executeQuery():ResultSet
+    //sql为增删改时,执行executeUpdate():int(受影响的行数)
+     int result=st.executeUpdate(sql);
+    //4.关闭资源(逆序关闭)
+    //注：关闭之前判断是否为null
+     if(st!=null){st.close();}
+     if(con!=null){con.close();} 
+     
+jdbc中的查询：
+   状态通道会将查询之后的结果返回给ResultSet(结果集)
+   示例:
+     String sql="select * from student";
+     ResultSet rs=st.executeQuery(sql);//st是Statement对象 
+     while(rs.next()){
+        rs.getInt(列下标或列名);
+        rs.getString(列下标或列名);
+     } 
+     注：列下标从1开始
+     rs.close();//关闭资源。  
+ //练习：创建一个用户表，包含用户编号(主键,自增长),
+ //用户名，密码，性别
+ //使用jdbc实现用户的添加,和查询   
+           
+        
+      
+    
+    
+                 	  
+     
+        
+    </pre>
+	<script type="text/javascript">
+	
+	</script>
+
+
+</body>
+</html>

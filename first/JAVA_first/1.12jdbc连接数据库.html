@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<title>html</title>
+		<meta name="Keywords" content="keyword,keyword">
+		<meta name="description" content="">
+
+		<!--css,js-->
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{margin:100px;background:#111;font-size:14px;font-family:"微软雅黑";font-weight:600;color:#F1F1F1}
+		</style>
+
+	</head>
+<body>
+	<pre>
+	//1.加载驱动
+Class.forName("com.mysql.jdbc.Driver");
+//2.获得连接 url,name,pass
+String url="jdbc:mysql://localhost/数据库名";
+Connection con=
+   DriverManager.getConnection(url,name,pass);
+//3.获得状态通道，传递sql语句
+  Statement st=con.createStatement(); 
+//4.调用方法执行sql语句
+   增删改：int  result=st.executeUpdate(sql);
+   查询： ResultSet result=st.executeQuery(sql);  
+//5.关闭资源
+   st.close();
+   con.close(); 
+   
+ 预状态通道：
+  //1.加载驱动
+  //2.获得连接
+  //3.得到预状态通道
+  //预状态通道的优势：
+  //(1).提前对sql语句进行预编译
+  //(2).支持占位符：?   注：赋值时下标从1开始
+  //(3).防止sql注入,预状态通道会将传递的值作为字符串处理
+  String sql="insert into student2 values(?,?)";
+  PreparedStatement pps=
+      con.preparedStatement(sql); 
+  //4.调用方法(如果sql语句中有问号,则需要给该问号赋值)
+  pps.setInt(参数下标,参数值);
+  pps.setString(参数下标,参数值);等方法
+  //5.执行方法
+   增删改：pps.executeUpdate();
+   查询：pps.executeQuery();
+  //6.关闭资源
+    pps.close();
+    con.close();    
+      
+      
+ 静态代码块
+   static{代码块} 
+ 特点：只执行一次
+       
+使用属性文件配置jdbc:
+  实现步骤：
+     //1.加载流,属性文件名自定义,后缀必须是properties
+  InputStream in=
+		当前类名.class.getClassLoader()
+	     .getResourceAsStream("jdbc.properties");
+	  //2.创建Properties对象   
+		Properties 	pro=new Properties();  
+		//3.调用load()
+		 pro.load(in);
+		//4.通过key值获得value值
+	 String value=pro.getProperty(String key);
+	</pre>
+	<script type="text/javascript">
+	
+	</script>
+
+
+</body>
+</html>

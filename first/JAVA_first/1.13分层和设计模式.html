@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<title>html</title>
+		<meta name="Keywords" content="keyword,keyword">
+		<meta name="description" content="">
+
+		<!--css,js-->
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{margin:100px;background:#111;font-size:14px;font-family:"微软雅黑";font-weight:600;color:#F1F1F1}
+		</style>
+
+	</head>
+<body>
+	<pre>
+	复习：
+ BaseDao
+
+1-27:
+  分层：dao层--持久化(永久保存)
+  实现：创建两个包：dao.impl
+            dao包写的是接口,只定义方法的结构
+            impl包写的是对应接口的实现类,完成方法实现
+   实体类包:entity包
+   定义的都是实体类,实体类中只定义属性和封装方法
+   属性名：要和数据库中表的列名一致
+   类名:要和数据库中对应的表名一致
+   作用：
+      使java中实体类的每一个对象都对应数据库中的一行数据
+ 添加顺序：
+       entity->dao->impl->client
+            
+
+设计模式：
+  1.工厂模式
+  2.单例模式
+    作用：无论如何调用，只生产一个类的对象
+    实现方式：
+       <1>无参构造私有化   
+       <2>提供一个方法返回本类的对象
+    代码：
+      懒汉：返回对象时做判断
+       public class 类名{
+          //1.私有构造
+           private 类名(){}
+          //2.声明本类对象
+          private static 类名 对象名=null;
+          //3.提供公有方法
+          public static 类名 getInstance(){
+             if(对象名==null){
+                对象名=new 类名();
+             }
+             return 对象名;
+          } 
+       }
+      饿汉：直接创建对象并返回
+       public class 类名{
+          private 类名(){}
+          private static final 类名 对象名=new 类名();
+          public static 类名 getInstance(){
+             return 对象名
+          }
+       }       
+       
+            
+       
+   
+      
+             
+            
+   
+  
+
+  
+	</pre>
+	<script type="text/javascript">
+	
+	</script>
+
+
+</body>
+</html>

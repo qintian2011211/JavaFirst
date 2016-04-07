@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<title>html</title>
+		<meta name="Keywords" content="keyword,keyword">
+		<meta name="description" content="">
+
+		<!--css,js-->
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{margin:100px;background:#111;font-size:14px;font-family:"微软雅黑";font-weight:600;color:#F1F1F1}
+		</style>
+
+	</head>
+<body>
+	<pre>（1）磁盘文件的遍历:File
+（2）内部类：
+  <1>成员内部类
+     (1)创建
+        public class 外部类名{
+           public class 内部类名{
+              //属性或方法
+           }
+        } 
+     补充：如果内部类的属性和外部类属性同名
+      则外部类的属性调用方式：外部类名.this.属性名;
+     示例：
+        public class Out{
+           private int age;
+           public class Inner{
+             private int age;
+             public void test(){
+                syso("外部类属性："+Out.this.age);
+             }
+           }
+      注：内部类可以直接访问外部类的私有属性
+      (2)创建内部类的对象:依赖于外部类对象
+      语法：外部类类名.内部类类名 对象名=
+                   外部类对象名.new 内部类类名();
+        示例:Out o=new Out(); 
+             Out.Inner in=o.new Inner();          
+           
+        }
+     
+  <2>局部内部类：定义在方法中的类
+   public class Test{
+      public void a(final String name){
+         final int age=10;
+         class Inner{
+            public void a(){
+               syso(name+" "+age);
+            }
+         }   
+      }
+   }     
+     注：局部内部类如果访问所在方法中的变量或者参数
+        那么该变量或参数需要使用final修饰 
+  <3>匿名内部类：在创建抽象类或者接口对象时，对没有实现的方法
+     进行实现。
+     缺点：代码不能重用
+     示例：
+       public interface UserDao{
+          public void a();
+       }  
+      //测试类:
+         UserDao dao=new UserDao(){
+            public void a(){}
+         }; 
+  <4>静态内部类:使用static修饰的内部类
+    注：(1)静态内部类只能访问外部类的静态成员变量
+        (2)创建静态内部类对象时，不依赖外部类的对象       
+    示例：
+       public class Out{
+       
+          public static class In{
+            public void a(){}
+          }
+          
+       }
+         
+       //测试：
+        Out.In in=new Out.In();
+        in.a();
+
+-----------------------
+TreeSet集合：
+   特点：会将存入的数据进行升序排序
+   注：不能直接对存入的对象进行排序
+对集合中对象进行排序的方式：
+  方式1：给对象所属的类实现Comparable接口
+  示例：
+    public class User implements Comparable{
+      //比较对象大小时自动调用
+       @Override
+       public  int CompareTo(Object o){
+          return 0;
+       }
+    }
+   方式2：创建一个"裁判"类,让该类实现Comparator接口
+          然后将裁判类的对象传到给集合
+    //裁判类：  
+    public class CaiPan implements Comparator<User>{
+
+			public int compare(User u1, User u2) {
+					return u1.age-u2.age;
+			}
+    }
+    //传入裁判
+    Set set=new TreeSet(new CaiPan());
+      
+                   
+         
+svn---版本控制器        </pre>
+	<script type="text/javascript">
+	
+	</script>
+
+
+</body>
+</html>

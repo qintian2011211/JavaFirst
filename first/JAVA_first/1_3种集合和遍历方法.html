@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<title>html</title>
+		<meta name="Keywords" content="keyword,keyword">
+		<meta name="description" content="">
+
+		<!--css,js-->
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{margin:100px;background:#111;font-size:14px;font-family:"微软雅黑";font-weight:600;color:#F1F1F1}
+		</style>
+
+	</head>
+<body>
+	<pre>
+	
+	1.java中的异常处理：
+   try-catch:
+     try{
+        //可能发生异常的代码
+     }catch(异常类型  ex){
+        //处理异常的方式
+     }catch(异常类型 ex){
+        //处理异常的方式
+     }
+  注：(1)当捕捉到对应的异常后,执行对应的处理方式，其他catch不执行
+      (2)多重catch中,异常类型从特殊到一般，或者从子类到父类
+         所以最后一个catch中定义的类型是Exception
+2.try-catch-finally
+  try{
+  
+  }catch(异常类型 ex){
+  
+  }finally{
+  
+  }
+  注：finally中的代码，无论是否发生异常，都会被执行
+     当在catch代码块中使用System.exit(1);强制退出程序,
+     finally中的代码不执行    
+     
+3.throws 声明异常：
+  语法：
+    public 返回值类型 方法名() throws 异常类型{}
+    注：多个异常之间使用逗号间隔
+    示例：
+    public void test() throws Exception{}
+  对于带有异常声明的方法，处理方式有两种：
+    (1)使用try-catch捕捉异常
+    (2)继续throws声明异常,直到声明到main方法
+4.throw  抛出异常
+  语法:
+     throw  new 异常类型("错误提示信息");
+  示例：
+    if(sex.equals("男")||sex.equals("女")){
+      System.out.println("性别合理");
+    }else{
+       throw new Exception("性别不合理");
+    } 
+  注：throw常和throws一起使用,throw负责抛出异常
+      throws负责给方法声明异常类型。 
+             
+5.自定义异常类型的步骤：
+  (1)创建异常类，继承Exception或者RuntimeException
+  (2)在异常类中调用父类的有参构造，将错误信息传入
+   示例：
+      public AgeException(String message){
+          super(message);
+      }
+  (3)抛出异常时，创建自定义异常的类型
+  示例：
+     throw  new AgeException("错误信息");    
+
+集合：
+  (1)常用集合接口和实现类
+     
+         Collection接口
+    List接口         Set接口             Map接口
+  ArrayList实现类     HashSet实现类      HashMap实现类
+  LinkedList实现类         
+ (2)List接口用于存储可重复(不唯一)，有序的数据
+    ArrayList本质上就是长度可变的数组,适用于遍历
+    或随机访问数据时效率高.如：商品列表。
+    LinkedList使用链式存储,数据存储时包含数据以及下一个数据
+    的内存地址,在添加或删除数据时效率高。
+    示例：购物车列表
+ (3)ArrayList常用方法:
+   添加数据：boolean add(Object obj);   
+指定位置添加数据:boolean add(int index,Object obj);
+  修改数据: set(int index,Object obj);
+  查看：get(int index);
+  获得集合长度：size();
+  删除数据：remove(int index);
+  判断集合是否为空：isEmpty();
+ (4)LinkedList除了ArrayList使用的方法以外，还有自己独有
+    的方法：
+     addFirst(Object obj);//给第一个位置添加
+     addLast(Object obj);//给最后一个位置添加
+     getFirst();//获得第一个元素
+     getLast();//获得最后的元素
+     removeFirst();//删除第一个元素
+     removeLast();//删除最后一个元素
+   注：如果想要使用上面的方法，在创建LinkedList对象时需要
+       声明自身对象。
+       示例：LinkedList list=new LinkedList(); 
+  (5)Set集合:
+     作用:存储唯一，无序的数据
+     创建操作：
+       Set set=new HashSet();
+     常用方法：
+         add(Object obj);
+     遍历数据:
+       方法1：使用foreach循环
+         for(Object obj:set){
+            //强转成具体子类
+         }
+       方法2:使用迭代器：Iterator
+       迭代器的常用方法：
+        hasNext():判断是否有下一个元素
+        next():获得下一个元素
+       示例：
+         Iterator it=set.iterator();
+         while(it.hasNext()){
+             Object obj=it.next();
+             //然后强转成具体子类
+         }
+   
+             
+         
+     
+
+    
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+【练习题】抽象类、继承、接口综合
+设计一个系统：
+XXX门的实现过程：
+流程：
+设计一张抽象的门Door，那么对于这张门来说，
+就应该拥有所有门的共性，开门openDoor()和关门closeDoor()；
+然后对门进行另外的功能设计,防盗--theftproof()、防水--waterproof()、
+防弹--bulletproof()、防火、防锈……
+要求：利用继承、抽象类、接口的知识设计该门
+//实现防盗门和防盗防水门的定义,
+//实现效果：输出各种门的功能
+
+
+	
+	</pre>
+	<script type="text/javascript">
+	
+	</script>
+
+
+</body>
+</html>
